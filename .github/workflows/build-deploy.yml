@@ -11,26 +11,26 @@ jobs:
   build:
     name: build and Deploy
     runs-on: windows-2019
-    # steps:
-    # - uses: actions/checkout@v3
-    # - name: Setup .NET
-    #   uses: actions/setup-dotnet@v2
-    #   with:
-    #     dotnet-version: 5.0.x
-    # - name: Restore dependencies
-    #   run: dotnet restore
-    # - name: Build
-    #   run: dotnet build --no-restore
     steps:
     - uses: actions/checkout@v3
-    - name: Setup NetCore SDK
-    - uses: actions/setup-dotnet@v2
-    - with:
-        dotnet-version: ${{ env.NetCore_Version }}
-    - name: Restore
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run:  dotnet build --no-restore -c Release
+      run: dotnet build --no-restore
+    # steps:
+    # - uses: actions/checkout@v3
+    # - name: Setup NetCore SDK
+    # - uses: actions/setup-dotnet@v2
+    # - with:
+    #     dotnet-version: ${{ env.NetCore_Version }}
+    # - name: Restore
+    #   run: dotnet restore
+    # - name: Build
+    #   run:  dotnet build --no-restore -c Release
     # - name: Publish
     #   run:  dotnet publish --no-build -c Release -o ./published
 
