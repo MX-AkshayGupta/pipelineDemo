@@ -1,6 +1,8 @@
 name: "WorkFlows Demo"
 
-on: [push]
+on: 
+  push:
+    branches: [ master ]
 
 env:  
   NetCore_Version:  '3.1.x'
