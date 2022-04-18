@@ -12,11 +12,12 @@ jobs:
     name: build and Deploy
     runs-on: self-hosted
     steps:
+    - shell: cmd
     - uses: actions/checkout@v1
-    # - name: Setup Dotnet SDK
-    #   uses: actions/setup-dotnet@v1
-    #   with:
-    #     dotnet-version: ${{ env.NetCore_Version }}
+    - name: Setup Dotnet SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.NetCore_Version }}
     - name: Restore
       run: dotnet restore
     - name: Build
