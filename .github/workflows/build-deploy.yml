@@ -10,38 +10,39 @@ env:
 jobs:
   build:
     name: build and Deploy
-    # runs-on: self-hosted
-    runs-on: windows-2019
+    runs-on: self-hosted
+    # runs-on: windows-2019
     steps:
-    - uses: actions/checkout@v1
+    # - uses: actions/checkout@v1
     # - name: Setup Dotnet SDK
     #   uses: actions/setup-dotnet@v1
     #   with:
     #     dotnet-version: ${{ env.NetCore_Version }}
-    - name: Restore
-      shell: cmd
-      run: dotnet restore
-    - name: Build
-      shell: cmd
-      run:  dotnet build --no-restore -c Release
-    # - name: Delete Existing Files
+    # - name: Restore
     #   shell: cmd
-    #   run: | 
-    #       Del E:\Akshay\Projects\Publish\*   
-    - name: Publish
-      shell: cmd 
-      # run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
-      run: dotnet publish --no-build -c Release -o ./published
+    #   run: dotnet restore
+    # - name: Build
+    #   shell: cmd
+    #   run:  dotnet build --no-restore -c Release
+    - name: Delete Existing Files
+      shell: cmd
+      run: | 
+          powershell.exe -ExecutionPolicy Bypass -File E:\Akshay\Projects\main.ps1   
+    # - name: Publish
+    #   shell: cmd 
+    #   run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
+      # run: dotnet publish --no-build -c Release -o ./published
     
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.UAT_IP}}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: 22
-        source: "./published/*"
-        target: E:\Akshay\Projects\Publish
+    # - name: copy file via ssh password
+    #   uses: appleboy/scp-action@master
+    #   with:
+    #     host: ${{ secrets.UAT_IP}}
+    #     username: ${{ secrets.USERNAME }}
+    #     password: ${{ secrets.PASSWORD }}
+    #     port: 22
+    #     source: "./published/*"
+    #     target: E:\Akshay\Projects\Publish
+
     # - name: IIS Deploy
     #   run: |
     #     Stop-IISSite -Name "Default Web Site"
