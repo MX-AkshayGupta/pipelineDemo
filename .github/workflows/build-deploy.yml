@@ -10,7 +10,8 @@ env:
 jobs:
   build:
     name: build and Deploy
-    runs-on: self-hosted
+    # runs-on: self-hosted
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v1
     # - name: Setup Dotnet SDK
@@ -29,10 +30,21 @@ jobs:
     #       Del E:\Akshay\Projects\Publish\*   
     - name: Publish
       shell: cmd 
-      run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
-    - name: IIS Deploy
-      run: |
-        Stop-IISSite -Name "Default Web Site"
+      # run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
+      run: dotnet publish --no-build -c Release -o ./published
+    
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.UAT_IP}}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        source: "./published/*"
+        target: E:\Akshay\Projects\Publish
+    # - name: IIS Deploy
+    #   run: |
+    #     Stop-IISSite -Name "Default Web Site"
  
     # - name: Publish Artifact
     #   uses: actions/upload-artifact@v1.0.0
