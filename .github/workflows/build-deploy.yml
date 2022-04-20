@@ -23,10 +23,10 @@ jobs:
     - name: Build
       shell: cmd
       run:  dotnet build --no-restore -c Release
-    - name: Delete Existing Files
-      shell: cmd
-      run: | 
-          Del E:\Akshay\Projects\Publish\*   
+    # - name: Delete Existing Files
+    #   shell: cmd
+    #   run: | 
+    #       Del E:\Akshay\Projects\Publish\*   
     - name: Publish
       shell: cmd 
       run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
