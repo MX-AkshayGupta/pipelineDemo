@@ -23,11 +23,11 @@ jobs:
     #   run: dotnet restore
     # - name: Build
     #   shell: cmd
-    #   run:  dotnet build --no-restore -c Release powershell.exe -ExecutionPolicy Bypass -File E:\Akshay\Projects\main.ps1   
+    #   run:  dotnet build --no-restore -c Release
     - name: Delete Existing Files
       shell: cmd
       run: | 
-          powershell -Command "Start-Process powershell \"-ExecutionPolicy Bypass -NoProfile -NoExit -Command `\"cd \`\"%E:\Akshay\Projects%`\"; & \`\".\%main.ps1%\`\"`\"\" -Verb RunAs"
+          powershell.exe -ExecutionPolicy Bypass -NoProfile -NoExit -File E:\Akshay\Projects\main.ps1   
     # - name: Publish
     #   shell: cmd 
     #   run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
