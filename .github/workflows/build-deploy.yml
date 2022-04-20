@@ -27,7 +27,7 @@ jobs:
     - name: Delete Existing Files
       shell: cmd
       run: | 
-          powershell.exe -ExecutionPolicy Bypass -NoProfile -NoExit -File E:\Akshay\Projects\main.ps1   
+          powershell -Command "Start-Process powershell 
     # - name: Publish
     #   shell: cmd 
     #   run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
