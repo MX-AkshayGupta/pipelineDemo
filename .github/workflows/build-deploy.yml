@@ -25,13 +25,14 @@ jobs:
       run:  dotnet build --no-restore -c Release
     - name: Delete Existing Files
       shell: cmd
-      run:  Del cmd E:\Akshay\Projects\Publish\*   
+      run: | 
+          Del E:\Akshay\Projects\Publish\*   
     - name: Publish
       shell: cmd 
       run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
-    # - name: IIS Deploy
-    #   run: |
-    #     Stop-IISSite -Name "Default Web Site"
+    - name: IIS Deploy
+      run: |
+        Stop-IISSite -Name "Default Web Site"
  
     # - name: Publish Artifact
     #   uses: actions/upload-artifact@v1.0.0
