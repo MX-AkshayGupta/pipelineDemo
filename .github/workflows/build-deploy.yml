@@ -10,7 +10,7 @@ env:
 jobs:
   build:
     name: build and Deploy
-    runs-on: self-hosted
+    runs-on: MX-Self-Hosted
     # runs-on: windows-2019
     steps:
     - uses: actions/checkout@v1
@@ -41,6 +41,16 @@ jobs:
       with:
         name: pub
         path: E:\Akshay\Projects\Publish
+  
+  deploy:
+    needs:  [build]
+    runs-on: MX-Self-Hosted
+    steps:
+      - name:
+        uses: actions/download-artifact@v3.0.0
+        with:
+          name: pub
+          path: E:\Akshay\Projects\publishDemo      
     # - name: copy file via ssh password
     #   uses: appleboy/scp-action@master
     #   with:
