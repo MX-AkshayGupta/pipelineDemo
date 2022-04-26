@@ -52,18 +52,18 @@ jobs:
       #     name: pub
       #     path: E:\Akshay\Projects\publishDemo     
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0 
+        uses: sebastianpopp/ftp-action@v2.0.0
         with:
           # ftp server
-          server: ${{ secrets.UAT_IP }}
+          host: ${{ secrets.UAT_IP }}
           # ftp username
-          username: ${{ secrets.USERNAME }}
+          user: ${{ secrets.USERNAME }}
           # ftp password
           password: ${{ secrets.PASSWORD }}
           # Folder to upload from, must end with trailing slash /
-          local-dir: E:/Akshay/Projects/publishDemo/
+          localDir: E:/Akshay/Projects/publishDemo/
           # Path to upload to on the server. Must end with trailing slash /
-          server-dir: C:/inetpub/wwwroot/
+          remoteDir: C:/inetpub/wwwroot/
 
     # - name: copy file via ssh password
     #   uses: appleboy/scp-action@master
