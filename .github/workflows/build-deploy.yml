@@ -56,7 +56,7 @@ jobs:
         # run: |
         #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
         run:  |
-          cd C:\inetpub\GitFiles\
+          powershell -command - < C:\inetpub\GitFiles\main.ps1
 
 
 
