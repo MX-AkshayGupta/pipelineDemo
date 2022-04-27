@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: pub
-        path: E:/Akshay/Projects/main.ps1
+        path: E:/Akshay/Projects/publish
   
   deploy:
     needs:  [build]
@@ -50,18 +50,18 @@ jobs:
         uses: actions/download-artifact@v3.0.0
         with:
           name: pub
-          path: C:/inetpub/GitFiles
+          path: C:/inetpub/GitFiles/Main
 
       - name: Delete Existing Artifact
         uses: geekyeggo/delete-artifact@v1
         with:
           name: pub    
 
-      - name: Build
-        # run: |
-        #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
-        run:  |
-              C:\inetpub\GitFiles\main.ps1
+      # - name: Build
+      #   # run: |
+      #   #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
+      #   run:  |
+      #         C:\inetpub\GitFiles\main.ps1
 
 
 
