@@ -52,7 +52,6 @@ jobs:
           name: pub
           path: C:/inetpub/GitFiles
       - name: Build
-        shell: pwsh
         # run: |
         #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
         run:  |
