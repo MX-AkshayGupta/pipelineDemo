@@ -51,11 +51,17 @@ jobs:
         with:
           name: pub
           path: C:/inetpub/GitFiles
+
+      - name: Delete Existing Artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: pub    
+
       - name: Build
         # run: |
         #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
         run:  |
-          powershell -command - < C:\inetpub\GitFiles\main.ps1
+              C:\inetpub\GitFiles\main.ps1
 
 
 
