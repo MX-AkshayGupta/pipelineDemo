@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 env:  
-  NetCore_Version:  '3.1.x'
+  NetCore_Version:  '5.0.x'
 
 jobs:
   build:
@@ -56,6 +56,11 @@ jobs:
         uses: geekyeggo/delete-artifact@v1
         with:
           name: pub    
+          
+      - name: Setup Dotnet SDK
+        uses: actions/setup-dotnet@v1
+        with:
+        dotnet-version: ${{ env.NetCore_Version }}
 
       # - name: Build
       #   # run: |
