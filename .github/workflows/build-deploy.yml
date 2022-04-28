@@ -8,11 +8,11 @@ env:
   NetCore_Version:  '5.0.x'
 
 jobs:
-   build:
-  #   name: build and Deploy
-     runs-on: MX-Self-Hosted
-  #   # runs-on: windows-2019
-     steps:
+  build:
+    name: build and Deploy
+    runs-on: MX-Self-Hosted
+    # runs-on: windows-2019
+    steps:
     # - uses: actions/checkout@v1
     # # - name: Setup Dotnet SDK
     # #   uses: actions/setup-dotnet@v1
@@ -46,7 +46,7 @@ jobs:
     needs:  [build]
     runs-on: EC2Runner
     steps:
-      # - name: 
+      - name: 
         uses: actions/download-artifact@v3.0.0
         with:
           name: pub
@@ -56,10 +56,10 @@ jobs:
       #   uses: geekyeggo/delete-artifact@v1
       #   with:
       #     name: pub    
-      - name: Build
+      - name: Builds
         shell: cmd
         run: |
-          powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""
+          powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1""" 
         # run: powershell.exe -ExecutionPolicy Bypass -File C:\inetpub\GitFiles\main.ps1    
       #   run:  |
       #         C:\inetpub\GitFiles\main.ps1
