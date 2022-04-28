@@ -56,7 +56,7 @@ jobs:
         uses: geekyeggo/delete-artifact@v1
         with:
           name: pub    
-      - name: Build
+      - name: Builds
         shell: cmd
         run: |
           powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1""" 
