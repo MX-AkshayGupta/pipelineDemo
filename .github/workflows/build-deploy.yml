@@ -10,7 +10,7 @@ env:
 jobs:
    build:
   #   name: build and Deploy
-  #   runs-on: MX-Self-Hosted
+     runs-on: MX-Self-Hosted
   #   # runs-on: windows-2019
      steps:
     # - uses: actions/checkout@v1
@@ -43,7 +43,7 @@ jobs:
         path: E:/Akshay/Projects/publish/main.ps1
   
   deploy:
-    # needs:  [build]
+    needs:  [build]
     runs-on: EC2Runner
     steps:
       # - name: 
