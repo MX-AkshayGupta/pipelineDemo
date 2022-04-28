@@ -47,7 +47,6 @@ jobs:
           E:/Akshay/Projects/publish
           !E:/Akshay/Projects/publish/appsettings.json
           !E:/Akshay/Projects/publish/appsettings.Development
-          !E:/Akshay/Projects/publish/web.config
 
     - name: Add PowerShell File 
       uses: actions/upload-artifact@v3
@@ -86,7 +85,7 @@ jobs:
         with:
           name: pubPwsh  
 
-      - name: Builds
+      - name: Builds  
         run: |
           powershell -noexit "& ""C:\inetpub\GitFiles\publish\main.ps1"""     
         # run:  |
