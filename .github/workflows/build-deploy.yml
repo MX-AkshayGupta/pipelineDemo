@@ -84,12 +84,13 @@ jobs:
       - name: Delete Existing Artifact
         uses: geekyeggo/delete-artifact@v1
         with:
-          name: pubPwsh        
-      # - name: Build
-      #   # run: |
-      #   #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
-      #   run:  |
-      #         C:\inetpub\GitFiles\main.ps1
+          name: pubPwsh  
+
+      - name: Build
+        # run: |
+        #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
+        run:  |
+              C:\inetpub\GitFiles\publish\main.ps1
 
 
 
