@@ -18,12 +18,12 @@ jobs:
     # #   uses: actions/setup-dotnet@v1
     # #   with:
     # #     dotnet-version: ${{ env.NetCore_Version }}
-    # - name: Restore
-    #   shell: cmd
-    #   run: dotnet restore
-    # - name: Build
-    #   shell: cmd
-    #   run:  dotnet build --no-restore -c Release
+    - name: Restore
+      shell: cmd
+      run: dotnet restore
+    - name: Build
+      shell: cmd
+      run:  dotnet build --no-restore -c Release
     # - name: Delete Existing Files
     #   shell: cmd
     #   run:  E:\Akshay\Projects\test.bat
@@ -31,38 +31,66 @@ jobs:
       #     powershell.exe -ExecutionPolicy Bypass -NoProfile -NoExit -File E:\Akshay\Projects\main.ps1   
       #     powershell -Command "Start-Process powershell \"-ExecutionPolicy Bypass -NoProfile -NoExit -Command `\"cd \`\"%E:\Akshay\Projects%`\"; & \`\".\%main.ps1%\`\"`\"\" -Verb RunAs"
    
-   
-    # - name: Publish
-    #   shell: cmd 
-    #   run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
+    - name: Delete current publish files
+      shell: cmd
+      run:  del /s /q E:\Akshay\Projects\Publish\*.*
+
+    - name: Publish
+      shell: cmd 
+      run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
     #   # run: dotnet publish --no-build -c Release -o ./published
     - name: publish artifacts
       uses: actions/upload-artifact@v3
       with:
         name: pub
-        path: E:/Akshay/Projects/main.ps1
-  
+        path: | 
+          E:/Akshay/Projects/publish
+          !E:/Akshay/Projects/publish/appsettings.json
+          !E:/Akshay/Projects/publish/appsettings.Development
+          !E:/Akshay/Projects/publish/web.config
+
+    - name: Add PowerShell File 
+      uses: actions/upload-artifact@v3
+      with:
+        name: pubPwsh
+        path: | 
+          E:/Akshay/Projects/main.ps1
+
   deploy:
     needs:  [build]
     runs-on: EC2Runner
     steps:
+      - name: Delete current publish files
+        shell: cmd
+        run:  del /s /q C:\inetpub\GitFiles\publish\*.*
+        
       - name: 
         uses: actions/download-artifact@v3.0.0
         with:
           name: pub
-          path: C:/inetpub/GitFiles
+          path: C:/inetpub/GitFiles/publish
 
-      # - name: Delete Existing Artifact
-      #   uses: geekyeggo/delete-artifact@v1
-      #   with:
-      #     name: pub    
-      - name: Builds
-        shell: cmd
+      - name: Delete Existing Artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: pub
+
+      - name: 
+        uses: actions/download-artifact@v3.0.0
+        with:
+          name: pubPwsh
+          path: C:/inetpub/GitFiles/publish
+
+      - name: Deletes Existing Artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: pubPwsh  
+
+      - name: Build
         run: |
-          powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1""" 
-        # run: powershell.exe -ExecutionPolicy Bypass -File C:\inetpub\GitFiles\main.ps1    
-      #   run:  |
-      #         C:\inetpub\GitFiles\main.ps1
+          powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
+        # run:  |
+        #       C:\inetpub\GitFiles\publish\main.ps1
 
 
 
