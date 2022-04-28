@@ -57,8 +57,9 @@ jobs:
         with:
           name: pub    
       - name: Build
-        run: |
-          powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
+        # run: |
+        #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1""" 
+        run: powershell.exe -ExecutionPolicy Bypass -File C:\inetpub\GitFiles\main.ps1    
       #   run:  |
       #         C:\inetpub\GitFiles\main.ps1
 
