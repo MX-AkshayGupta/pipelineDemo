@@ -36,26 +36,26 @@ jobs:
     #   shell: cmd 
     #   run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
     #   # run: dotnet publish --no-build -c Release -o ./published
-    - name: publish artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: pub
-        path: E:/Akshay/Projects/publish
+    # - name: publish artifacts
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: pub
+    #     path: E:/Akshay/Projects/publish
   
   deploy:
     needs:  [build]
     runs-on: EC2Runner
     steps:
-      - name: 
-        uses: actions/download-artifact@v3.0.0
-        with:
-          name: pub
-          path: C:/inetpub/GitFiles/Main
+      # - name: 
+      #   uses: actions/download-artifact@v3.0.0
+      #   with:
+      #     name: pub
+      #     path: C:/inetpub/GitFiles/Main
 
-      - name: Delete Existing Artifact
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: pub    
+      # - name: Delete Existing Artifact
+      #   uses: geekyeggo/delete-artifact@v1
+      #   with:
+      #     name: pub    
       - name: Builds
         shell: cmd
         run: |
