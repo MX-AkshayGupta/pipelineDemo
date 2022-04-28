@@ -86,7 +86,7 @@ jobs:
         with:
           name: pubPwsh  
 
-      - name: Builds
+      - name: Build
         run: |
           powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
         # run:  |
