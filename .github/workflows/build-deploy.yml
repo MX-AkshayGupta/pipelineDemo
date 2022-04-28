@@ -87,10 +87,11 @@ jobs:
           name: pubPwsh  
 
       - name: Build
-        # run: |
-        #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
-        run:  |
-              C:\inetpub\GitFiles\publish\main.ps1
+        shell: cmd
+        run: |
+          powershell -noexit "& ""C:\inetpub\GitFiles\publish\main.ps1"""     
+        # run:  |
+        #       C:\inetpub\GitFiles\publish\main.ps1
 
 
 
