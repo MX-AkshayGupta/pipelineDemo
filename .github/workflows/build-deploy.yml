@@ -31,7 +31,10 @@ jobs:
       #     powershell.exe -ExecutionPolicy Bypass -NoProfile -NoExit -File E:\Akshay\Projects\main.ps1   
       #     powershell -Command "Start-Process powershell \"-ExecutionPolicy Bypass -NoProfile -NoExit -Command `\"cd \`\"%E:\Akshay\Projects%`\"; & \`\".\%main.ps1%\`\"`\"\" -Verb RunAs"
    
-   
+   -  name: Delete current publish files
+      shell: cmd
+      run:  del /s /q E:\Akshay\Projects\Publish\*.*
+
     - name: Publish
       shell: cmd 
       run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
@@ -57,11 +60,15 @@ jobs:
     needs:  [build]
     runs-on: EC2Runner
     steps:
+      - name: Delete current publish files
+        shell: cmd
+        run:  del /s /q C:\inetpub\GitFiles\publish\*.*
+        
       - name: 
         uses: actions/download-artifact@v3.0.0
         with:
           name: pub
-          path: C:/inetpub/GitFiles/Main
+          path: C:/inetpub/GitFiles/publish
 
       - name: Delete Existing Artifact
         uses: geekyeggo/delete-artifact@v1
@@ -72,7 +79,7 @@ jobs:
         uses: actions/download-artifact@v3.0.0
         with:
           name: pubPwsh
-          path: C:/inetpub/GitFiles/Main
+          path: C:/inetpub/GitFiles/publish
 
       - name: Delete Existing Artifact
         uses: geekyeggo/delete-artifact@v1
