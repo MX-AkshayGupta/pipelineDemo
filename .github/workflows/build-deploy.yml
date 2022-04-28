@@ -18,12 +18,12 @@ jobs:
     # #   uses: actions/setup-dotnet@v1
     # #   with:
     # #     dotnet-version: ${{ env.NetCore_Version }}
-    # - name: Restore
-    #   shell: cmd
-    #   run: dotnet restore
-    # - name: Build
-    #   shell: cmd
-    #   run:  dotnet build --no-restore -c Release
+    - name: Restore
+      shell: cmd
+      run: dotnet restore
+    - name: Build
+      shell: cmd
+      run:  dotnet build --no-restore -c Release
     # - name: Delete Existing Files
     #   shell: cmd
     #   run:  E:\Akshay\Projects\test.bat
@@ -32,16 +32,27 @@ jobs:
       #     powershell -Command "Start-Process powershell \"-ExecutionPolicy Bypass -NoProfile -NoExit -Command `\"cd \`\"%E:\Akshay\Projects%`\"; & \`\".\%main.ps1%\`\"`\"\" -Verb RunAs"
    
    
-    # - name: Publish
-    #   shell: cmd 
-    #   run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
+    - name: Publish
+      shell: cmd 
+      run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
     #   # run: dotnet publish --no-build -c Release -o ./published
     - name: publish artifacts
       uses: actions/upload-artifact@v3
       with:
         name: pub
-        path: E:/Akshay/Projects/publish
-  
+        path: | 
+          E:/Akshay/Projects/publish
+          !E:/Akshay/Projects/publish/appsettings.json
+          !E:/Akshay/Projects/publish/appsettings.Development
+          !E:/Akshay/Projects/publish/web.config
+
+    - name: Add PowerShell File 
+      uses: actions/upload-artifact@v3
+      with:
+        name: pubPwsh
+        path: | 
+          E:/Akshay/Projects/main.ps1
+
   deploy:
     needs:  [build]
     runs-on: EC2Runner
@@ -55,13 +66,18 @@ jobs:
       - name: Delete Existing Artifact
         uses: geekyeggo/delete-artifact@v1
         with:
-          name: pub    
+          name: pub
 
-      - name: Setup Dotnet SDK
-        uses: actions/setup-dotnet@v1
+      - name: 
+        uses: actions/download-artifact@v3.0.0
         with:
-          dotnet-version: ${{ env.NetCore_Version }}
+          name: pubPwsh
+          path: C:/inetpub/GitFiles/Main
 
+      - name: Delete Existing Artifact
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: pubPwsh        
       # - name: Build
       #   # run: |
       #   #   powershell -noexit "& ""C:\inetpub\GitFiles\main.ps1"""     
