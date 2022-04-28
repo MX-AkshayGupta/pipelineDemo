@@ -31,7 +31,7 @@ jobs:
       #     powershell.exe -ExecutionPolicy Bypass -NoProfile -NoExit -File E:\Akshay\Projects\main.ps1   
       #     powershell -Command "Start-Process powershell \"-ExecutionPolicy Bypass -NoProfile -NoExit -Command `\"cd \`\"%E:\Akshay\Projects%`\"; & \`\".\%main.ps1%\`\"`\"\" -Verb RunAs"
    
-   -  name: Delete current publish files
+    - name: Delete current publish files
       shell: cmd
       run:  del /s /q E:\Akshay\Projects\Publish\*.*
 
