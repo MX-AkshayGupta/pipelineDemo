@@ -81,7 +81,7 @@ jobs:
           name: pubPwsh
           path: C:/inetpub/GitFiles/publish
 
-      - name: Delete Existing Artifact
+      - name: Deletes Existing Artifact
         uses: geekyeggo/delete-artifact@v1
         with:
           name: pubPwsh  
