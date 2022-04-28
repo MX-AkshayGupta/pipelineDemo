@@ -8,11 +8,11 @@ env:
   NetCore_Version:  '5.0.x'
 
 jobs:
-  # build:
+   build:
   #   name: build and Deploy
   #   runs-on: MX-Self-Hosted
   #   # runs-on: windows-2019
-  #   steps:
+     steps:
     # - uses: actions/checkout@v1
     # # - name: Setup Dotnet SDK
     # #   uses: actions/setup-dotnet@v1
