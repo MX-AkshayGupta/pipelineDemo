@@ -8,11 +8,11 @@ env:
   NetCore_Version:  '5.0.x'
 
 jobs:
-  build:
-    name: build and Deploy
-    runs-on: MX-Self-Hosted
-    # runs-on: windows-2019
-    steps:
+  # build:
+  #   name: build and Deploy
+  #   runs-on: MX-Self-Hosted
+  #   # runs-on: windows-2019
+  #   steps:
     # - uses: actions/checkout@v1
     # # - name: Setup Dotnet SDK
     # #   uses: actions/setup-dotnet@v1
@@ -43,7 +43,7 @@ jobs:
     #     path: E:/Akshay/Projects/publish
   
   deploy:
-    needs:  [build]
+    # needs:  [build]
     runs-on: EC2Runner
     steps:
       # - name: 
