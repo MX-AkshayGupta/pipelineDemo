@@ -24,7 +24,7 @@ jobs:
       run: dotnet restore E:\Akshay\Projects\gitWorkflowDemo\gitWorkflowDemo.sln
     - name: Build
       shell: cmd
-      run:  dotnet build E:\Akshay\Projects\gitWorkflowDemo\gitWorkflowDemo.sln -c Release --no-restore -c Release
+      run:  dotnet build E:\Akshay\Projects\gitWorkflowDemo\gitWorkflowDemo.sln --no-restore -c Release
    
     - name: Delete current publish files
       shell: cmd
