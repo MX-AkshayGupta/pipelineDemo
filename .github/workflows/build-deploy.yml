@@ -21,10 +21,10 @@ jobs:
     
     - name: Restore
       shell: cmd
-      run: dotnet restore
+      run: dotnet restore E:\Akshay\Projects\gitWorkflowDemo\gitWorkflowDemo.sln
     - name: Build
       shell: cmd
-      run:  dotnet build --no-restore -c Release
+      run:  dotnet build E:\Akshay\Projects\gitWorkflowDemo\gitWorkflowDemo.sln -c Release --no-restore -c Release
    
     - name: Delete current publish files
       shell: cmd
@@ -32,7 +32,7 @@ jobs:
 
     - name: Publish
       shell: cmd 
-      run:  dotnet publish --no-build -c Release -o E:\Akshay\Projects\Publish
+      run:  dotnet publish E:\Akshay\Projects\gitWorkflowDemo\gitWorkflowDemo.sln --no-build -c Release -o E:\Akshay\Projects\Publish
 
     - name: publish artifacts
       uses: actions/upload-artifact@v3
